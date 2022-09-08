@@ -1,1 +1,1 @@
-export * from './window/window.component';
+export * from './dragMove/dragMove.component';
