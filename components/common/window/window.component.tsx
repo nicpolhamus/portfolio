@@ -15,43 +15,11 @@ export function WindowComponent({ defaultPosition }: IWindowProps): ReactElement
   const basePosition = { x: 0, y: 0 };
   const [translate, setTranslate] = useState(defaultPosition || basePosition);
 
-  const isInHeightBounds = (y: number): boolean => (y <= window.innerHeight && y >= 0);
-  const isInWidthBounds = (x: number): boolean => (x <= window.innerWidth && x >= 0);
-
-  const getTranslation = (x: number, y: number) => {
-    let newY = y;
-    let newX = x;
-
-    if (!isInWidthBounds(x)) {
-      if (x < 0) {
-        newX = 0;
-      }
-      
-      if (newX > window.innerWidth) {
-        newX = window.innerWidth;
-      }
-    }
-
-    if (!isInHeightBounds(y)) {
-      if (y < 0) {
-        newY = 0;
-      }
-      
-      if (newY > window.innerHeight) {
-        newY = window.innerHeight;
-      }
-    }
-
-    return { newX, newY };
-  }
-
   const handleDragMove = (event: any) => {
-    // TODO: add checks to ensure that window doesn't move outside of viewport
-    const { newX: x, newY: y } = getTranslation(
-      translate.x + event.movementX,
-      translate.y + event.movementY,
-    )
-    setTranslate({ x, y });
+    setTranslate({
+      x: translate.x + event.movementX,
+      y: translate.y + event.movementY, 
+    });
   };
 
   
