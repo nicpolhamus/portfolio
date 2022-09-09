@@ -1,26 +1,19 @@
-import { ReactElement, useState } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 
 export interface IDragMoveProps {
-  styles: Record<string, string>;
-  className: string;
+  styles?: Record<string, string>;
+  className?: string;
   children: ReactElement;
+  onDragMove: (event: any) => void;
 }
 
-export function DragMove({ children, className, styles }: IDragMoveProps) {
-  const [translate, setTranslate] = useState({ x: 0, y: 0});
+export function DragMove({ children, className, styles, onDragMove }: IDragMoveProps) {
   const [isDragging, setIsDragging] = useState(false);
-
-  const handleDragMove = (event: any) => {
-    setTranslate({
-      x: translate.x + event.movementX,
-      y: translate.y + event.movementY
-    });
-  };
 
   const handlePointerDown = (event: any) => {
     setIsDragging(true);
 
-    handleDragMove(event);
+    onDragMove(event);
   };
 
   const handlePointerUp = (event: any) => {
@@ -29,7 +22,7 @@ export function DragMove({ children, className, styles }: IDragMoveProps) {
 
   const handlePointerMove = (event: any) => {
     if (isDragging) {
-      handleDragMove(event);
+      onDragMove(event);
     }
   };
 

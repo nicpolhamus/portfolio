@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 
-import { WindowComponent } from '../components/core'
+import { WindowComponent } from '../components/common/window/window.component';
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {

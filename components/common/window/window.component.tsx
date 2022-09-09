@@ -1,78 +1,71 @@
-import { MouseEventHandler, ReactElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
+import { DragMove } from '../../core';
 
 type TPosition = {
   x: number;
   y: number;
 };
 
-export interface IWindowPosition {
-  current: TPosition;
-  previous: TPosition;
-} 
-
 export interface IWindowProps {
-  defaultPosition: IWindowPosition;
+  defaultPosition?: TPosition;
 }
 
 // TODO: update component to use DragMove
 export function WindowComponent({ defaultPosition }: IWindowProps): ReactElement {
-  const divRef = useRef<HTMLDivElement>(null);
-  let offsetTop: number = 0;
-  let offsetLeft: number = 0;
+  const basePosition = { x: 0, y: 0 };
+  const [translate, setTranslate] = useState(defaultPosition || basePosition);
 
-  const [current, setcurrent] = useState<IWindowPosition>({
-    current: { x: 0, y: 0 },
-    previous: { x: 0, y: 0 },
-  });
+  const isInHeightBounds = (y: number): boolean => (y <= window.innerHeight && y >= 0);
+  const isInWidthBounds = (x: number): boolean => (x <= window.innerWidth && x >= 0);
 
-  const updatecurrent = (newPosition: IWindowPosition): void => 
-    setcurrent({
-      current: { 
-        x: (current.current.x + newPosition.current.x),
-        y: (current.current.y + newPosition.current.y),
-      },
-      previous: {
-        x: (current.previous.x + newPosition.previous.x),
-        y: (current.previous.y + newPosition.previous.y),
-      },
-    });
+  const getTranslation = (x: number, y: number) => {
+    let newY = y;
+    let newX = x;
 
-  const mouseDown = (event: any): void => {
-    event.preventDefault();
-    // update just for previous
-    updatecurrent({
-      current: current.current,
-      previous: current.current,
-    });
-  };
-
-  const mouseMove = (event: any) => {
-    event.preventDefault();
-
-    updatecurrent({
-      current: {
-        x: (current.previous.x - event.clientX),
-        y: (current.previous.y - event.clientY),
-      },
-      previous: {
-        x: event.clientX,
-        y: event.clientY
+    if (!isInWidthBounds(x)) {
+      if (x < 0) {
+        newX = 0;
       }
-    });
+      
+      if (newX > window.innerWidth) {
+        newX = window.innerWidth;
+      }
+    }
+
+    if (!isInHeightBounds(y)) {
+      if (y < 0) {
+        newY = 0;
+      }
+      
+      if (newY > window.innerHeight) {
+        newY = window.innerHeight;
+      }
+    }
+
+    return { newX, newY };
+  }
+
+  const handleDragMove = (event: any) => {
+    // TODO: add checks to ensure that window doesn't move outside of viewport
+    const { newX: x, newY: y } = getTranslation(
+      translate.x + event.movementX,
+      translate.y + event.movementY,
+    )
+    setTranslate({ x, y });
   };
 
+  
   return (
-    <div 
-      ref={divRef}
-      onMouseDown={mouseDown}
-      onMouseMove={mouseMove}
-      style={{
-        background: '#985',
-        cursor: 'move',
-        top: `${offsetTop - current.current.y}px`,
-        left: `${offsetLeft - current.current.x}px`,
-      }}>
-      Test
-    </div>
+    <DragMove onDragMove={handleDragMove}>
+      <div
+        style={{
+          background: '#985',
+          transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
+          height: '500px',
+          width: '40%',
+        }}>
+        Test
+      </div>
+    </DragMove>
   );
 }
