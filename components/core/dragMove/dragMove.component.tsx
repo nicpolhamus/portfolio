@@ -7,7 +7,7 @@ export interface IDragMoveProps {
   onDragMove: (event: any) => void;
 }
 
-export function DragMove({ children, className, styles, onDragMove }: IDragMoveProps) {
+export function DragMove({ children, className, styles, onDragMove }: IDragMoveProps): ReactElement {
   const [isDragging, setIsDragging] = useState(false);
 
   const handlePointerDown = (event: any) => {

@@ -1,5 +1,7 @@
 import React, { ReactElement, useState } from 'react';
-import { DragMove } from '../../core';
+import styled from 'styled-components';
+
+import { DragMove, MenuBar } from '../../core';
 
 type TPosition = {
   x: number;
@@ -10,7 +12,13 @@ export interface IWindowProps {
   defaultPosition?: TPosition;
 }
 
-// TODO: update component to use DragMove
+const WindowDiv = styled.div`
+  background: #678199;
+  height: 600px;
+  width: 450px;
+  border-radius: 6px;
+`;
+
 export function WindowComponent({ defaultPosition }: IWindowProps): ReactElement {
   const basePosition = { x: 0, y: 0 };
   const [translate, setTranslate] = useState(defaultPosition || basePosition);
@@ -27,12 +35,12 @@ export function WindowComponent({ defaultPosition }: IWindowProps): ReactElement
     <DragMove onDragMove={handleDragMove}>
       <div
         style={{
-          background: '#985',
           transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
-          height: '500px',
-          width: '40%',
         }}>
-        Test
+        <WindowDiv>
+          <MenuBar />
+          Test
+        </WindowDiv>
       </div>
     </DragMove>
   );
