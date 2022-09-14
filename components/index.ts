@@ -1,1 +1,1 @@
-export * from './main.window.component';
+export * from './core/system/system.window.component';

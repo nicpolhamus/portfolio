@@ -1,2 +1,3 @@
-export * from './dragMove/dragMove.component';
-export * from './menuBar/menuBar.component';
+export * from './dragMove.component';
+export * from './menuBar.component';
+export * from './types';

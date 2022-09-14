@@ -1,13 +1,10 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
-type TMenuItem = {
-  text: string;
-  action: (args: any) => void;
-};
+import { TAction, TMenuItem } from './types';
 
 export interface IMenuBar {
-  onClose: (args: any) => void;
+  onClose?: TAction;
   items?: TMenuItem[];
   help?: string;
   // TODO: add options?
@@ -25,25 +22,33 @@ const MenuBarDiv = styled.div`
   width: 100%;
 `;
 
+const MenuBarContent = styled.div`
+  background: inherit;
+  margin: 1% 0 0 2%;
+  float: left;
+`;
+
 const CloseButton = styled.button`
   float: right;
-  margin: 5px 5px 0 0;
+  margin: 1% 2% 0 0;
   width: 5%;
   border-radius: 100%;
 `;
 
-export function MenuBar({ items, help, onClose }: IMenuBar): ReactElement {
+export function MenuBar({ onClose, items, help }: IMenuBar): ReactElement {
   const handleClose = (event: any) => {
     event.preventDefault();
 
-    onClose(event);
+    onClose && onClose(event);
   };
 
   return (
     <>
       <MenuBarDiv>
-        test
-        <CloseButton onClick={handleClose}>X</CloseButton>
+        <MenuBarContent>
+          test
+        </MenuBarContent>
+        {onClose && <CloseButton onClick={handleClose}>X</CloseButton>}
       </MenuBarDiv>
     </>
   );
