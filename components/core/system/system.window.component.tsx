@@ -1,6 +1,8 @@
+import { MouseEventHandler } from "react";
 import styled from "styled-components";
+import { SystemMenuBar } from "./system.menuBar.component";
 
-import { MenuBar } from "..";
+
 
 const SystemWindowContent = styled.div`
   text-align: center;
@@ -8,12 +10,16 @@ const SystemWindowContent = styled.div`
 `;
 
 export function SystemWindowComponent() {
+  const handleClose: MouseEventHandler = () => {
+    alert('tried to close');
+  };
+
   return (
     <>
       <SystemWindowContent>
 
       </SystemWindowContent>
-      <MenuBar></MenuBar>
+      <SystemMenuBar onClose={handleClose}/>
     </>
   );
 }
