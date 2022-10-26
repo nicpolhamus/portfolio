@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 export type TAction = (args: any) => void;
 
 export type TPosition = {
@@ -5,4 +7,4 @@ export type TPosition = {
   y: number;
 };
 
-export type TMenuItem = Record<string, TAction>;
+export type TMenuItem = Record<ReactElement, TAction>;

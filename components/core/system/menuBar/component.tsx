@@ -6,7 +6,6 @@ import { MenuItemContainer } from './menuItemContainer/component';
 
 export interface ISystemMenuBarProps {
   items?: TMenuItem[];
-  onClose: (args: any) => void;
 }
 
 interface IMenuBarContentProps {
@@ -25,7 +24,7 @@ const SystemMenuBarDiv = styled.div`
   width: 100%;
 `;
 
-export function SystemMenuBar({ items, onClose }: ISystemMenuBarProps): ReactElement {
+export function SystemMenuBar({ items }: ISystemMenuBarProps): ReactElement {
   // @TODO: need to define how we get the system menu items
   return (
     <SystemMenuBarDiv>

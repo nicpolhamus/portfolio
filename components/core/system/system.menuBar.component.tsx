@@ -1,9 +1,10 @@
 import React, { MouseEventHandler } from "react";
 import styled from "styled-components";
+
 import { TMenuItem } from "../types";
+import { StartButton } from './menuBar/items';
 
 export interface ISystemMenuBarProps {
-  items?: TMenuItem[];
   onClose: (args: any) => void;
 }
 
@@ -18,14 +19,14 @@ const SystemMenuBarDiv = styled.div`
   width: 100%;
 `;
 
-export function SystemMenuBar({ items, onClose }: ISystemMenuBarProps) {
+export function SystemMenuBar({ onClose }: ISystemMenuBarProps) {
   const handleClose: MouseEventHandler = (event: MouseEvent) => {
     onClose(event);
   };
 
   return (
     <SystemMenuBarDiv>
-       
+      <StartButton />
     </SystemMenuBarDiv>
   )
 }
