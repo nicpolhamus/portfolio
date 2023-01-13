@@ -1,3 +1,6 @@
+import { ReactElement } from 'react';
+import { IWindowProps } from '../common/window/component';
+
 export type TAction = (args: any) => void;
 
 export type TPosition = {
@@ -9,3 +12,9 @@ export type TMenuItem = {
   text: string;
   action: TAction;
 };
+
+export type TWindow = {
+  id: number;
+  zIndex: string;
+  minimized: boolean;
+} & IWindowProps;

@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, ReactElement } from 'react';
 
-import { TMenuItem } from '../types';
+import { TMenuItem } from '../../types';
 import { MenuItem } from './menuItem/component';
 
 export interface ISystemMenuBarProps {
@@ -13,7 +13,7 @@ export function DesktopMenuBar({ items }: ISystemMenuBarProps): ReactElement {
   return (
     <div className="menu-bar">
       <div className="menu">
-        {items.map(item => (<MenuItem item={item} />))}
+        {items.map(( item, index ) => (<MenuItem item={item} key={index}/>))}
       </div>
     </div>
   );

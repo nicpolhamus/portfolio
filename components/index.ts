@@ -1,1 +1,2 @@
-export * from './core/system/desktop/component';
+export * from './core';
+export * from './common';

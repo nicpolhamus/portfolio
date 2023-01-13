@@ -4,7 +4,7 @@ import { TMenuItem } from '../../types';
 import { DesktopMenuBar } from '../menuBar/component';
 import { StartItem } from '../menuBar/items';
 
-export function Desktop({ children }: { children: ReactElement }): ReactElement {
+export function Desktop(): ReactElement {
   const handleClose: MouseEventHandler = () => {
     alert('tried to close');
   };
@@ -15,9 +15,8 @@ export function Desktop({ children }: { children: ReactElement }): ReactElement 
   // @TODO: figure out how to include a system button 
   // (maybe have a default that can be overridden)
   return (
-  <div className="desktop">
-    <DesktopMenuBar items={[StartItem]}/>
-   {children}
-  </div>
+    <div className="desktop">
+      <DesktopMenuBar items={[StartItem]}/>
+    </div>
   );
 }

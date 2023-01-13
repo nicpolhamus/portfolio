@@ -1210,6 +1210,11 @@
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"
   "version" "5.2.0"
 
+"immer@^9.0.17", "immer@>=9.0":
+  "integrity" "sha512-+hBruaLSQvkPfxRiTLK/mi4vLH+/VQS6z2KJahdoxlleFOI8ARqzOF17uy12eFDlqWmPoygwc5evgwcp+dlHhg=="
+  "resolved" "https://registry.npmjs.org/immer/-/immer-9.0.17.tgz"
+  "version" "9.0.17"
+
 "immutable@^4.0.0":
   "integrity" "sha512-7WYV7Q5BTs0nlQm7tl92rDYYoyELLKHoDMBKhrxEoiV4mrfVdRz8hzPiYOzH7yWjzoVEamxRuAqhxL2PLRwZYQ=="
   "resolved" "https://registry.npmjs.org/immutable/-/immutable-4.2.1.tgz"
@@ -1389,9 +1394,9 @@
   "version" "1.0.1"
 
 "json5@^1.0.1":
-  "integrity" "sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow=="
-  "resolved" "https://registry.npmjs.org/json5/-/json5-1.0.1.tgz"
-  "version" "1.0.1"
+  "integrity" "sha512-g1MWMLBiz8FKi1e4w0UyVL3w+iJceWAFBAaBnnGKOpNa5f8TLktkbre1+s6oICydWAm+HRUGTmI+//xv2hvXYA=="
+  "resolved" "https://registry.npmjs.org/json5/-/json5-1.0.2.tgz"
+  "version" "1.0.2"
   dependencies:
     "minimist" "^1.2.0"
 
@@ -1721,7 +1726,7 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-"react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@18.2.0":
+"react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.8", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
@@ -2069,3 +2074,10 @@
   "integrity" "sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q=="
   "resolved" "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   "version" "0.1.0"
+
+"zustand@^4.3.1":
+  "integrity" "sha512-EVyo/eLlOTcJm/X5M00rwtbYFXwRVTaRteSvhtbTZUCQFJkNfIyHPiJ6Ke68MSWzcKHpPzvqNH4gC2ZS/sbNqw=="
+  "resolved" "https://registry.npmjs.org/zustand/-/zustand-4.3.1.tgz"
+  "version" "4.3.1"
+  dependencies:
+    "use-sync-external-store" "1.2.0"
