@@ -6,13 +6,7 @@ import { Window } from '../../../';
 
 export function WindowOutlet(): ReactElement {
   // window state utilites
-  const {
-    windows,
-    addWindow,
-    clearWindows,
-    removeWindow,
-    updateWindow,
-  } = useStore(
+  const { windows } = useStore(
     (state: any): IWindowStore => ({
       windows: state.windows,
       addWindow: state.addWindow,

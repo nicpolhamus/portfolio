@@ -8,11 +8,6 @@ export type TPosition = {
   y: number;
 };
 
-export type TMenuItem = {
-  text: string;
-  action: TAction;
-};
-
 export type TWindow = {
   id: number;
   zIndex: string;

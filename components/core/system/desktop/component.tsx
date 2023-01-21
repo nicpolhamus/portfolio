@@ -1,8 +1,7 @@
 import { MouseEventHandler, ReactElement } from 'react';
 
-import { TMenuItem } from '../../types';
 import { DesktopMenuBar } from '../menuBar/component';
-import { StartItem } from '../menuBar/items';
+import { Start } from '../menuBar/items';
 
 export function Desktop(): ReactElement {
   const handleClose: MouseEventHandler = () => {
@@ -16,7 +15,7 @@ export function Desktop(): ReactElement {
   // (maybe have a default that can be overridden)
   return (
     <div className="desktop">
-      <DesktopMenuBar items={[StartItem]}/>
+      <DesktopMenuBar items={[Start]}/>
     </div>
   );
 }

@@ -4,6 +4,8 @@ $accent-color: #CCCCCC;
 $menu-bar-buffer: 30px;
 $font-family: 'Courier New', Courier, monospace;
 
+$menu-item-width: 50px;
+
 body {
   background: box;
   background-color: $secondary-color;
@@ -73,7 +75,6 @@ button {
 .menu-bar {
   background-color: $primary-color;
   display: flex;
-  align-items: center;
   height: 25px;
   width: 100%;
   font-family: $font-family;
@@ -93,17 +94,19 @@ button {
 }
 
 .menu-item {
-  display: flex;
+  position: inherit;
   align-items: center;
   justify-content: center;
   height: auto;
-  width: auto;
+  width: $menu-item-width;
   background-color: $primary-color;
   color: $secondary-color;
   border: 1px solid $primary-color;
   font-family: $font-family;
   text-transform: uppercase;
   cursor: pointer;
+  margin-bottom: 1%;
+  overflow: visible;
 
   &:hover {
     background-color: $secondary-color;
@@ -116,5 +119,24 @@ button {
 }
 
 .menu:hover .menu-item {
+  display: block;
+}
+
+.menu-item-options {
+  align-items: flex-start;
+  justify-content: center;
+  border: 1px solid white;  
+  background-color: $primary-color;
+  width: $menu-item-width;
+  margin-top: 1%;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.menu-item-options ul {
+  list-style-type: none;
+}
+
+.menu-item-options ul.show {
   display: block;
 }
