@@ -13,10 +13,9 @@ function StartOptions({ visible }: TStartOptionsProps): ReactElement {
   return (
     <>
       {visible && (
-        <div className='menu-item-options'>
           <ul
             role='listbox'
-            className={`${visible ? 'show' : ''}`}
+            className={`menu-item-options`}
             tabIndex={-1}
           >
             {startButtonOptions.map((option, index) => (
@@ -28,7 +27,6 @@ function StartOptions({ visible }: TStartOptionsProps): ReactElement {
               </li>
             ))}    
           </ul>
-        </div>
       )}
     </>
   );
@@ -43,18 +41,17 @@ export function Start(): ReactElement {
 
   return (
     <>
-      <div>
+      <div className='menu-item'>
         <button
           aria-haspopup='listbox'
           aria-expanded={visible}
-          className='menu-item'
           type='button'
           onClick={handleClick}
         >
           Start
         </button>
+        <StartOptions visible={visible}/>
       </div>
-      <StartOptions visible={visible}/>
     </>
   )
 }

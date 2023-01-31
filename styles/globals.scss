@@ -68,75 +68,65 @@ button {
   font-family: $font-family;
   cursor: pointer;
   &:hover {
-    color: white;
+    color: $accent-color;
   }
 }
 
 .menu-bar {
   background-color: $primary-color;
   display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   height: 25px;
   width: 100%;
   font-family: $font-family;
 }
 
-.menu {
-  border: 1px solid white;
-  color: $secondary-color;
-  cursor: pointer;
-  font-size: 14px;
-  font-family: $font-family;
-  margin: 0 0.25%;
-  padding: 0.1%;
-  &:hover {
-    color: white;
-  }
-}
-
 .menu-item {
-  position: inherit;
-  align-items: center;
-  justify-content: center;
   height: auto;
   width: $menu-item-width;
   background-color: $primary-color;
   color: $secondary-color;
-  border: 1px solid $primary-color;
+  border: 1px solid $accent-color;
   font-family: $font-family;
-  text-transform: uppercase;
+  font-size: 14px;
   cursor: pointer;
-  margin-bottom: 1%;
+  margin: 0 0.25%;
+  padding: 0.1%;
   overflow: visible;
 
   &:hover {
     background-color: $secondary-color;
-    color: $primary-color;
+    color: $accent-color;
   }
 
   &:active {
     border: 1px solid $secondary-color;
+    color: $accent-color;
   }
 }
 
-.menu:hover .menu-item {
-  display: block;
+.menu-item button {
+  text-transform: uppercase;
 }
 
 .menu-item-options {
-  align-items: flex-start;
-  justify-content: center;
-  border: 1px solid white;  
+  float: left;
+  border-style: solid;
+  border-color: $accent-color;
+  border-top: none;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
   background-color: $primary-color;
   width: $menu-item-width;
-  margin-top: 1%;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-.menu-item-options ul {
+  margin-left: -4%;
+  margin-top: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
   list-style-type: none;
 }
 
-.menu-item-options ul.show {
-  display: block;
+.menu-item-options.show {
+  display: inline-block;
 }
