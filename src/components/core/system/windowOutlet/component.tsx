@@ -1,7 +1,7 @@
 import { ReactElement, useMemo } from 'react';
-import { useStore } from '../stores';
+import { useStore } from '../../../../src/stores';
 
-import { IWindowStore } from '../stores/window.store';
+import { IWindowStore } from '../../../../src/stores/window.store';
 import { Window } from '../../../';
 
 export function WindowOutlet(): ReactElement {
