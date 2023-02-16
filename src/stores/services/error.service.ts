@@ -1,4 +1,4 @@
-import { IMessageContext, MessageContext } from '../contexts/message.context'
+import { IMessageContext } from '../contexts/message.context'
 
 export abstract class ErrorService {
   private context: IMessageContext;

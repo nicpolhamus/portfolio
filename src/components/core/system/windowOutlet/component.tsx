@@ -1,25 +1,22 @@
 import { ReactElement, useMemo } from 'react';
-import { useStore } from '../../../../src/stores';
 
-import { IWindowStore } from '../../../../src/stores/window.store';
 import { Window } from '../../../';
+import { useWindowService } from '../../../../hooks/use.window.service';
 
 export function WindowOutlet(): ReactElement {
-  // window state utilites
-  const { windows } = useStore(
-    (state: any): IWindowStore => ({
-      windows: state.windows,
-      addWindow: state.addWindow,
-      clearWindows: state.clearWindows,
-      removeWindow: state.removeWindow,
-      updateWindow: state.updateWindow,
-    })
-  );
+  // window state utilites 
+  const windowService = useWindowService();
+  
+  const windows = windowService.get();
 
   const activeWindows = useMemo(() => {
     // setup initial windows
-    if (windows.length) {
+    if (windows && Array.isArray(windows)) {
       return windows.filter(({ minimized }) => !minimized);  
+    }
+
+    if (windows) {
+      return [windows];
     }
     
     return [];

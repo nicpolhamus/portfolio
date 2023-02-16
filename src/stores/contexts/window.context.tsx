@@ -1,10 +1,10 @@
-import { createContext, Dispatch, SetStateAction} from 'react';
+import { createContext } from 'react';
 
-import { TWindow } from '../../components/core/types';
+import { TWindowComponent } from '../../components/core/types';
 
 export interface IWindowContext {
-  windows: TWindow[];
-  minimizedWindows?: TWindow[];
+  windows: TWindowComponent[];
+  minimizedWindows?: TWindowComponent[];
 }
 
 export const WindowContext = createContext<IWindowContext>({ windows: [] });

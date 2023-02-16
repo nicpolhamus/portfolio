@@ -1,7 +1,7 @@
 import { IMessageContext } from '../contexts/message.context';
 import { ErrorService } from './error.service';
 import { IWindowContext } from '../contexts/window.context';
-import { IWindow } from '../../components';
+import { TWindowComponent } from '../../components';
 import { IBaseService } from './base.service';
 
 export class WindowService extends ErrorService implements IBaseService {
@@ -15,29 +15,25 @@ export class WindowService extends ErrorService implements IBaseService {
       .windows.filter(({ minimized }) => minimized === true);
   }
 
-  public get(window?: IWindow): IWindow | IWindow[] {
-    if (window) {
-      const retrievedWindow = this.windowContext.windows.find(
-        ({ id }) => id === window.id
-      );
+  public get(window?: TWindowComponent): TWindowComponent | TWindowComponent[] {
+    const retrievedWindow = this.windowContext.windows.find(
+      ({ id }) => id === window?.id
+    );
 
-      if (!retrievedWindow) {
-        this.handleError("window doesn't exist!");
-      }
-
-      return retrievedWindow;
-    } else {
-      return this.windowContext.windows;
+    if (!retrievedWindow) {
+      this.handleError("window doesn't exist!");
     }
+
+    return retrievedWindow ? retrievedWindow : this.windowContext.windows;
   }
 
-  public add(window: IWindow): IWindow {
+  public add(window: TWindowComponent): TWindowComponent {
     this.windowContext.windows.push(window);
 
     return window;
   }
 
-  public delete({ id: windowId }: IWindow): IWindow[] {
+  public delete({ id: windowId }: TWindowComponent): TWindowComponent[] {
     const windowIndex = this.windowContext.windows.findIndex(
       ({ id }) => id === windowId
     );
@@ -45,13 +41,13 @@ export class WindowService extends ErrorService implements IBaseService {
     return this.windowContext.windows.splice(windowIndex, 1);
   }
 
-  public update(window: IWindow): IWindow {
+  public update(window: TWindowComponent): TWindowComponent {
     this.delete(window);
 
     return this.add(window);
   }
 
-  public minimize(window: IWindow): void {
+  public minimize(window: TWindowComponent): void {
     if (window) {
       window.minimized = true;
 
@@ -65,7 +61,7 @@ export class WindowService extends ErrorService implements IBaseService {
     }
   }
 
-  public deleteMinimized(window: IWindow): void {
+  public deleteMinimized(window: TWindowComponent): void {
     if (window &&  this.windowContext.minimizedWindows) {
       const windowIndex = this.windowContext.minimizedWindows.findIndex(
         ({ id }) => id === window.id
@@ -77,7 +73,7 @@ export class WindowService extends ErrorService implements IBaseService {
     }
   }
 
-  public maximize(window: IWindow): void {
+  public maximize(window: TWindowComponent): void {
     if (window) {
       window.minimized = false;
 
