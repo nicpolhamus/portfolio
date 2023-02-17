@@ -1,4 +1,5 @@
 import { MouseEventHandler, ReactElement } from 'react';
+import { WindowOutlet } from '..';
 
 import { DesktopMenuBar } from '../menuBar/component';
 import { Start } from '../menuBar/items';
@@ -16,6 +17,8 @@ export function Desktop(): ReactElement {
   return (
     <div className="desktop">
       <DesktopMenuBar items={[Start]}/>
+      {/* need to set a window outlet here */}
+      <WindowOutlet />
     </div>
   );
 }

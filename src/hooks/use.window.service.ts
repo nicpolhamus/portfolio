@@ -1,11 +1,12 @@
-import { useContext } from "react";
-import { MessageContext, WindowContext, WindowService } from "../stores";
+import { useContext } from 'react';
+import { IWindowContext, WindowContext } from '../stores';
 
-
-
-export function useWindowService(): WindowService {
-  const messageContext = useContext(MessageContext);
+export function useWindowService(): IWindowContext {
   const windowContext = useContext(WindowContext);
 
-  return new WindowService(messageContext, windowContext);
+  if (!windowContext) {
+    throw new Error(`Window context doesn't exist!`);
+  }
+
+  return windowContext;
 }

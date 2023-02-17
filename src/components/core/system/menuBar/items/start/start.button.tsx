@@ -1,9 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-
-const startButtonOptions = [
-  'Hello',
-  'World',
-];
+import { StartButtonOptions } from './options';
 
 type TStartOptionsProps = {
   visible: boolean;
@@ -18,14 +14,9 @@ function StartOptions({ visible }: TStartOptionsProps): ReactElement {
             className={`menu-item-options`}
             tabIndex={-1}
           >
-            {startButtonOptions.map((option, index) => (
-              <li
-                tabIndex={0}
-                key={index}
-              >
-                {option}
-              </li>
-            ))}    
+            {StartButtonOptions.map((Option, index) =>
+              <Option key={index} /> 
+            )}    
           </ul>
       )}
     </>

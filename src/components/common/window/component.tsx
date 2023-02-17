@@ -1,14 +1,15 @@
-import React, { MouseEvent, MouseEventHandler, ReactElement, useState } from 'react';
+import React, { MouseEvent, MouseEventHandler, PropsWithChildren, ReactElement, ReactNode, useState } from 'react';
 
-import { DragMove, MenuBar, type TPosition } from '../../core';
+import { DragMove, type TPosition } from '../../core';
 
 export interface IWindowProps {
+  zIndex: string;
+  content?: ReactNode;
   defaultPosition?: TPosition;
-  canClose?: boolean
-  children: ReactElement;
+  canClose?: boolean;
 }
 
-export function Window({ defaultPosition = { x: 0, y: 0 }, canClose = true, children }: IWindowProps): ReactElement {
+export function Window({ defaultPosition = { x: 0, y: 0 }, canClose = true, children }: PropsWithChildren<IWindowProps>): ReactElement {
   const [translate, setTranslate] = useState(defaultPosition);
   const [isClosed, setIsClosed] = useState(false);
 
@@ -32,11 +33,11 @@ export function Window({ defaultPosition = { x: 0, y: 0 }, canClose = true, chil
           style={{
             transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
           }}>
-          <WindowDiv>
-            {canClose && <MenuBar onClose={handleClose} />}
-            {!canClose && <MenuBar />}
+          <div>
+            {/* {canClose && <MenuBar onClose={handleClose} />}
+            {!canClose && <MenuBar />} */}
             {children}
-          </WindowDiv>
+          </div>
         </div>
       </DragMove>)}
     </>

@@ -1,6 +1,5 @@
-export interface IStartButtonOptions {
-  text: string;
-  action: Function;
-}
+import { NewWindowButton } from './new.window';
 
-export * from './new.window';
+export const StartButtonOptions = [
+  NewWindowButton,
+];

@@ -1,16 +1,27 @@
-import { WindowService } from "../../../../../../../stores";
+import React from 'react';
 
-interface IStartButtonOptions {
-  text: string;
-  action: Function;
-}
+import { useWindowService } from '../../../../../../../hooks/use.window.service';
+import { IWindow } from '../../../../../types';
 
-const StartButtonOptions: IStartButtonOptions[] = [
-  {
-    text: 'New Window',
-    action: (windowService: WindowService) => {
-      const
-      windowService.add()
-    }
+export function NewWindowButton() {
+  const { add } = useWindowService();
+
+  const handleClick = () => {
+    const newWindow: IWindow = {
+      id: 1,
+      zIndex: '1',
+      content: 'test',
+    };
+
+    add(newWindow);
   }
-]
+
+  return (
+    <li
+      tabIndex={0}
+      onClick={handleClick}
+    >
+      Add Window
+    </li>
+  );
+}
