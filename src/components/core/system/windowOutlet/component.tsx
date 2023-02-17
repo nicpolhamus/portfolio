@@ -7,10 +7,12 @@ export function WindowOutlet(): ReactElement {
   // window state utilites 
   const { windows } = useWindowService();
 
+  const activeWindows = useMemo(() => windows, [windows]);
+
   return (
     <div>
       { 
-        windows.map(({ id, defaultPosition, zIndex, content }) => 
+        activeWindows.map(({ id, defaultPosition, zIndex, content }) => 
           (<Window defaultPosition={defaultPosition} key={id} zIndex={zIndex}>{content}</Window>)
         )
       }
