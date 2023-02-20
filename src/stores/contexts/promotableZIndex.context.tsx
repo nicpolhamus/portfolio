@@ -22,19 +22,32 @@ export const PromotableZIndexProvider = ({ children }: PropsWithChildren) => {
 
   // Returns the z-index of a sibling, taking into account whether it's the
   // currently promoted one:
-  const getZIndex = (zIndexId: string) => {
-    (promotedElementName === zIndexId) 
-      ? promotedZIndex 
-      : normalZIndices.find(({ id }) => id === zIndexId)?.zIndex;
+  const getZIndex = (zIndexId: string): number => {
+    const zIndex = Array.isArray(normalZIndices) ? normalZIndices.find(({ id }) => id === zIndexId)?.zIndex : defaultZIndex;
+    
+    if (promotedElementName === zIndexId) {
+      return promotedZIndex;
+    } else if (zIndex) {
+      return zIndex;
+    } else {
+      return defaultZIndex;
+    }
   }
 
   const addZIndex = (zIndexId: string) => {
     setNormalZIndices({ [zIndexId]: defaultZIndex, ...normalZIndices});
   }
 
-  const promoteZIndex = (siblingName: string) => setPromotedElementName(siblingName);
+  const promoteZIndex = (windowId: string) => {
+    setPromotedElementName(windowId);
+    // sort array so that windows stack correctly
+  };
 
   const restoreZIndex = () => setPromotedElementName(undefined);
+
+  const cycleZIndices = (windowId: string) => {
+
+  };
 
   const value = { addZIndex, getZIndex, promoteZIndex, restoreZIndex };
 
