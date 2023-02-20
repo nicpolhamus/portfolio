@@ -1,15 +1,18 @@
-import React, { MouseEvent, MouseEventHandler, PropsWithChildren, ReactElement, ReactNode, useState } from 'react';
+import React, { MouseEvent, MouseEventHandler, PropsWithChildren, ReactNode, useState } from 'react';
+import { usePromotableZIndex } from '../../../hooks/use.promotable.zIndex';
 
 import { DragMove, type TPosition } from '../../core';
 
 export interface IWindowProps {
-  zIndex: string;
+  id: string;
   content?: ReactNode;
   defaultPosition?: TPosition;
   canClose?: boolean;
 }
 
-export function Window({ defaultPosition = { x: 0, y: 0 }, canClose = true, children }: PropsWithChildren<IWindowProps>): ReactElement {
+export function Window({ defaultPosition = { x: 0, y: 0 }, id, canClose = true, children }: PropsWithChildren<IWindowProps>) {
+  const { getZIndex, promoteZIndex, restoreZIndex } = usePromotableZIndex();
+
   const [translate, setTranslate] = useState(defaultPosition);
   const [isClosed, setIsClosed] = useState(false);
 
@@ -24,22 +27,30 @@ export function Window({ defaultPosition = { x: 0, y: 0 }, canClose = true, chil
     setIsClosed(!isClosed);
   };
 
+  const handleMouseEnter = () => {
+    restoreZIndex();
+    promoteZIndex(id);
+  };
 
   return (
     <>
-      {!isClosed && (<DragMove onDragMove={handleDragMove}>
-        <div
+      {
+        !isClosed && (
+        <DragMove 
+          onDragMove={handleDragMove}
+          zIndex={getZIndex(id)}
+          onMouseEnter={handleMouseEnter}
           className="window"
-          style={{
+          styles={{
             transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
-          }}>
-          <div>
-            {/* {canClose && <MenuBar onClose={handleClose} />}
-            {!canClose && <MenuBar />} */}
-            {children}
-          </div>
-        </div>
-      </DragMove>)}
+          }}
+        >
+          {/* {canClose && <MenuBar onClose={handleClose} />}
+          {!canClose && <MenuBar />} */}
+          {children}
+        </DragMove>
+        )
+      }
     </>
   );
 }

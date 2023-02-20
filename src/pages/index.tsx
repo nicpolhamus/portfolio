@@ -2,14 +2,16 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 
-import { Desktop, WindowProvider } from '../components';
+import { Desktop, PromotableZIndexProvider, WindowProvider } from '../components';
 
 const Home: NextPage = () => {
 
   return (
     <div>
       <WindowProvider>
-        <Desktop />
+        <PromotableZIndexProvider>
+          <Desktop />
+        </PromotableZIndexProvider>
       </WindowProvider>
     </div>
   );

@@ -1,13 +1,22 @@
-import React, { ReactElement, useRef, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 export interface IDragMoveProps {
   styles?: Record<string, string>;
   className?: string;
-  children: ReactElement;
+  zIndex: number;
+  children: ReactNode;
   onDragMove: (event: any) => void;
+  onMouseEnter: () => void;
 }
 
-export function DragMove({ children, className, styles, onDragMove }: IDragMoveProps): ReactElement {
+export function DragMove({ 
+  children,
+  className,
+  zIndex,
+  styles,
+  onDragMove,
+  onMouseEnter,
+}: IDragMoveProps) {
   const [isDragging, setIsDragging] = useState(false);
 
   const handlePointerDown = (event: any) => {
@@ -16,7 +25,7 @@ export function DragMove({ children, className, styles, onDragMove }: IDragMoveP
     onDragMove(event);
   };
 
-  const handlePointerUp = (event: any) => {
+  const handlePointerUp = () => {
     setIsDragging(false);
   }
 
@@ -31,8 +40,10 @@ export function DragMove({ children, className, styles, onDragMove }: IDragMoveP
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerMove={handlePointerMove}
-      style={styles}
-      className={className}>
+      onMouseEnter={onMouseEnter}
+      style={{ zIndex, ...styles }}
+      className={className}
+    >
       {children}
     </div>
   );

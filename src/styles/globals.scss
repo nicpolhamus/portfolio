@@ -17,7 +17,6 @@ body {
   justify-content: flex-start;
   position: relative;
   font-family: $font-family;
-  z-index: 0;
   height: 100%;
   width: 100%;
 }
@@ -32,7 +31,11 @@ body {
   top: $menu-bar-buffer;
   margin: 10px $menu-bar-buffer;
   font-family: $font-family;
-  z-index: 1;
+  z-index: 0;
+
+  :active {
+    z-index: 1;
+  }
 }
 
 .window-header {

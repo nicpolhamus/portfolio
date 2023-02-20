@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, ReactNode } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import { IWindow } from '../../components';
 
 export interface IWindowContext {
@@ -16,8 +16,9 @@ export const WindowContext = createContext<IWindowContext | null>(null);
 export const WindowProvider = ({
   children,
 }: { children?: ReactNode }) => {
-  const windows: IWindow[] = [];
-  const minimizedWindows: IWindow[] = [];
+  const [windows, setWindows] = useState<IWindow[]>([]);
+  const [minimizedWindows, setMinimizedWindows] = useState<IWindow[]>([]);
+  
 
   const get = (windowId?: number): IWindow[] => {
     const window = windows.find(({ id }) => id === windowId);
@@ -31,16 +32,21 @@ export const WindowProvider = ({
 
   const add = (window: IWindow, minimized = false): void => {
     if (minimized) {
-      minimizedWindows.push(window);
+      setMinimizedWindows(minimizedWindows.concat(window));
     } else {
-      windows.push(window);
+      setWindows(windows.concat(window));
     }
   };
 
   const remove = (windowId: number): IWindow[] => {
+    const currentWindows = windows;
     const windowIndex = windows.findIndex(({ id }) => id === windowId);
 
-    return windows.splice(windowIndex, 1);
+    const removedWindow = currentWindows.splice(windowIndex, 1);
+
+    setWindows(currentWindows);
+
+    return removedWindow;
   };
 
   const update = (window: IWindow): void => {

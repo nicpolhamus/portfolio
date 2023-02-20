@@ -9,11 +9,8 @@ export type TPosition = {
 };
 
 export interface IWindow {
-  id: number;
-  zIndex: string;
+  id: string;
   minimized?: boolean;
   defaultPosition?: TPosition;
   content?: ReactNode;
 }
-
-export type TWindowComponent = IWindow;

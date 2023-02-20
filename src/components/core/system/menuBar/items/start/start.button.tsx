@@ -3,9 +3,10 @@ import { StartButtonOptions } from './options';
 
 type TStartOptionsProps = {
   visible: boolean;
+  handleVisibility: () => void;
 }
 
-function StartOptions({ visible }: TStartOptionsProps): ReactElement {
+function StartOptions({ visible, handleVisibility }: TStartOptionsProps): ReactElement {
   return (
     <>
       {visible && (
@@ -15,7 +16,7 @@ function StartOptions({ visible }: TStartOptionsProps): ReactElement {
             tabIndex={-1}
           >
             {StartButtonOptions.map((Option, index) =>
-              <Option key={index} /> 
+              <Option key={index} handleVisibility={handleVisibility} /> 
             )}    
           </ul>
       )}
@@ -26,7 +27,7 @@ function StartOptions({ visible }: TStartOptionsProps): ReactElement {
 export function Start(): ReactElement {
   const [visible, setVisibility] = useState<boolean>(false);
 
-  const handleClick = (event: any) => {
+  const handleClick = () => {
     setVisibility(!visible);
   };
 
@@ -41,7 +42,7 @@ export function Start(): ReactElement {
         >
           Start
         </button>
-        <StartOptions visible={visible}/>
+        <StartOptions visible={visible} handleVisibility={handleClick} />
       </div>
     </>
   )

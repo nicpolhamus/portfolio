@@ -1,10 +1,11 @@
-import { MouseEventHandler, ReactElement } from 'react';
+import { MouseEventHandler } from 'react';
 import { WindowOutlet } from '..';
+import { PromotableZIndexProvider } from '../../../../stores/contexts/promotableZIndex.context';
 
 import { DesktopMenuBar } from '../menuBar/component';
 import { Start } from '../menuBar/items';
 
-export function Desktop(): ReactElement {
+export function Desktop() {
   const handleClose: MouseEventHandler = () => {
     alert('tried to close');
   };
