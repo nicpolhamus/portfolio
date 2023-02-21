@@ -8,7 +8,7 @@ import { IWindow } from '../../../../../types';
 
 export function NewWindowButton({ handleVisibility }: IOptionProps) {
   const { add } = useWindowService();
-  const { addZIndex } = usePromotableZIndex();
+  const { addZIndex, promoteZIndex } = usePromotableZIndex();
 
   const handleClick = () => {
     const newWindow: IWindow = {
@@ -19,6 +19,7 @@ export function NewWindowButton({ handleVisibility }: IOptionProps) {
     add(newWindow);
     handleVisibility();
     addZIndex(newWindow.id);
+    promoteZIndex(newWindow.id);
   };
 
   return (

@@ -3,18 +3,19 @@
 import { createContext, PropsWithChildren, useState } from 'react';
 
 export interface IPromotedZIndexContext {
-  addZIndex: (name: string) => void;
-  getZIndex: (name: string) => number;
-  promoteZIndex: (name: string) => void;
+  addZIndex: (windowId: string) => void;
+  getZIndex: (windowId: string) => number;
+  promoteZIndex: (windowId: string) => void;
   restoreZIndex: () => void;
 }
 
 export const PromotableZIndexContext = createContext<IPromotedZIndexContext | null>(null);
 
 export const PromotableZIndexProvider = ({ children }: PropsWithChildren) => {
-  const [normalZIndices, setNormalZIndices] = useState<Array<{ id: string, zIndex: number }>>([]);
-  const defaultZIndex = -1;
+  const [normalZIndices, setNormalZIndices] = useState<string[]>([]);
+  const defaultZIndex = 1;
   const promotedZIndex = 100;
+  const zIndexIncrement = 10;
 
   // The name of the currently promoted sibling, if any. Initialized to
   // `undefined` (none promoted):
@@ -22,32 +23,35 @@ export const PromotableZIndexProvider = ({ children }: PropsWithChildren) => {
 
   // Returns the z-index of a sibling, taking into account whether it's the
   // currently promoted one:
-  const getZIndex = (zIndexId: string): number => {
-    const zIndex = Array.isArray(normalZIndices) ? normalZIndices.find(({ id }) => id === zIndexId)?.zIndex : defaultZIndex;
-    
-    if (promotedElementName === zIndexId) {
-      return promotedZIndex;
-    } else if (zIndex) {
-      return zIndex;
-    } else {
-      return defaultZIndex;
+  const getZIndex = (windowId: string): number => {
+    if (Array.isArray(normalZIndices)) {
+      const windowIndex = normalZIndices.findIndex(id => id === windowId);
+      
+      return (windowIndex + zIndexIncrement);
     }
+      
+    return defaultZIndex;
   }
 
-  const addZIndex = (zIndexId: string) => {
-    setNormalZIndices({ [zIndexId]: defaultZIndex, ...normalZIndices});
+  const addZIndex = (windowId: string) => {
+    normalZIndices.push(windowId);
+
+    setNormalZIndices(normalZIndices);
   }
 
   const promoteZIndex = (windowId: string) => {
     setPromotedElementName(windowId);
-    // sort array so that windows stack correctly
+
+    if (normalZIndices.length > 1) {
+      const promotedIndex = normalZIndices.findIndex(id => id === windowId);
+      // sort array so that windows stack correctly
+      const indicesToMove = normalZIndices.splice(promotedIndex, 1);
+      
+      setNormalZIndices(normalZIndices.concat(indicesToMove));
+    }
   };
 
   const restoreZIndex = () => setPromotedElementName(undefined);
-
-  const cycleZIndices = (windowId: string) => {
-
-  };
 
   const value = { addZIndex, getZIndex, promoteZIndex, restoreZIndex };
 

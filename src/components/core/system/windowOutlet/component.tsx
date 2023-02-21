@@ -1,9 +1,14 @@
 import { useMemo } from 'react';
 
 import { Window } from '../../../';
+import { Plane } from '../../../../constants/Plane';
 import { useWindowService } from '../../../../hooks/use.window.service';
 
-export function WindowOutlet() {
+interface IWindowOutlet {
+  checkBounds: (movement: number, plane: Plane) => number;
+}
+
+export function WindowOutlet({ checkBounds }: IWindowOutlet) {
   // window state utilites 
   const { windows } = useWindowService();
 
@@ -13,7 +18,16 @@ export function WindowOutlet() {
     <>
       { 
         activeWindows.map(({ id, defaultPosition, content }) => 
-          (<Window defaultPosition={defaultPosition} key={id} id={id}>{content}</Window>)
+          (
+            <Window
+              checkBounds={checkBounds}
+              defaultPosition={defaultPosition}
+              key={id}
+              id={id}
+            >
+              {content}
+            </Window>
+          )
         )
       }
     </>
