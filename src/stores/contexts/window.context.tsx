@@ -4,10 +4,10 @@ import { IWindow } from '../../components';
 export interface IWindowContext {
   windows: IWindow[];
   add: (window: IWindow, minimized?: boolean) => void;
-  get: (windowId?: number) => IWindow[];
-  remove: (windowId: number) => IWindow[];
+  get: (windowId?: string) => IWindow[];
+  remove: (windowId: string) => IWindow[];
   update: (window: IWindow) => void;
-  minimize: (windowId: number) => void;
+  toggleMinimize: (windowId: string, minimized?: boolean) => void;
   minimizedWindows?: IWindow[];
 }
 
@@ -20,7 +20,7 @@ export const WindowProvider = ({
   const [minimizedWindows, setMinimizedWindows] = useState<IWindow[]>([]);
   
 
-  const get = (windowId?: number): IWindow[] => {
+  const get = (windowId?: string): IWindow[] => {
     const window = windows.find(({ id }) => id === windowId);
 
     if (window) {
@@ -38,27 +38,34 @@ export const WindowProvider = ({
     }
   };
 
-  const remove = (windowId: number): IWindow[] => {
-    const currentWindows = windows;
-    const windowIndex = windows.findIndex(({ id }) => id === windowId);
+  const remove = (windowId: string, minimized = false): IWindow[] => {
+    let removedWindow: IWindow[];
 
-    const removedWindow = currentWindows.splice(windowIndex, 1);
+    if (!minimized) {
+      const currentWindows = windows;
+      const windowIndex = windows.findIndex(({ id }) => id === windowId);
+  
+      removedWindow = currentWindows.splice(windowIndex, 1);
 
-    setWindows(currentWindows);
+      setWindows(currentWindows);
+    } else {
+      const currentMinimizedWindows = minimizedWindows;
+      const windowIndex = minimizedWindows.findIndex(({ id }) => id === windowId);
+
+      removedWindow = currentMinimizedWindows.splice(windowIndex, 1);
+    }
 
     return removedWindow;
   };
 
   const update = (window: IWindow): void => {
-    remove(window.id);
-
-    add(window);
+    setWindows([ window, ...windows ]);
   };
 
-  const minimize = (windowId: number): void => {
-    const [window] = remove(windowId);
+  const toggleMinimize = (windowId: string, minimized = true): void => {
+    const [window] = remove(windowId, !minimized);
 
-    add(window, true);
+    add(window, minimized);
   };
 
   const value = {
@@ -68,7 +75,7 @@ export const WindowProvider = ({
     add,
     remove,
     update,
-    minimize,
+    toggleMinimize,
   };
 
   return <WindowContext.Provider value={value}>{children}</WindowContext.Provider>;

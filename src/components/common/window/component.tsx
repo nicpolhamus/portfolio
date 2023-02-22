@@ -1,41 +1,66 @@
 import React, { MouseEvent, MouseEventHandler, PropsWithChildren, ReactNode, useState } from 'react';
 import { Plane } from '../../../constants/Plane';
 import { usePromotableZIndex } from '../../../hooks/use.promotable.zIndex';
+import { useWindowService } from '../../../hooks/use.window.service';
 
 import { DragMove, type TPosition } from '../../core';
+import { WindowMenuBar } from './menuBar/component';
 
 export interface IWindowProps {
   id: string;
   content?: ReactNode;
   defaultPosition?: TPosition;
   canClose?: boolean;
-  checkBounds: (movement: number, plane: Plane) => number;
+  canMinimize?: boolean;
+  checkBounds: (
+    movement: number,
+    currentPos: number,
+    plane: Plane,
+  ) => number;
 }
 
 export function Window({
   defaultPosition = { x: 0, y: 0 },
   id,
   canClose = true,
+  canMinimize = true,
   checkBounds,
   children,
-}: PropsWithChildren<IWindowProps>) {  
+}: PropsWithChildren<IWindowProps>) {
+  const { get, remove, toggleMinimize, update } = useWindowService();
   const { getZIndex, promoteZIndex, restoreZIndex } = usePromotableZIndex();
   const [translate, setTranslate] = useState(defaultPosition);
   const [isClosed, setIsClosed] = useState(false);
 
   const handleDragMove: MouseEventHandler = (event: MouseEvent) => {
-    const inboundX = checkBounds(event.movementX, Plane.X);
-    const inboundY = checkBounds(event.movementY, Plane.Y);
+    event.preventDefault();
+
+    const inboundX = checkBounds(event.movementX, translate.x, Plane.X);
+    const inboundY = checkBounds(event.movementY, translate.y, Plane.Y);
 
     setTranslate({
-      x: translate.x + inboundX,
-      y: translate.y + inboundY,
+      x: inboundX,
+      y: inboundY,
     });
   };
 
 
   const handleClose: MouseEventHandler = (event: MouseEvent) => {
-    setIsClosed(!isClosed);
+    setIsClosed(true);
+
+    remove(id);
+  };
+
+  const handleMinimize: MouseEventHandler = (event: MouseEvent) => {
+    event.preventDefault();
+
+    const [window] = get(id);
+
+    window.defaultPosition = translate;
+
+    update(window);
+
+    toggleMinimize(id);
   };
 
   const handleMouseEnter = () => {
@@ -47,19 +72,26 @@ export function Window({
     <>
       {
         !isClosed && (
-          <DragMove 
-            onDragMove={handleDragMove}
-            zIndex={getZIndex(id)}
-            onMouseEnter={handleMouseEnter}
+          <div
             className="window"
-            styles={{
+            style={{
+              zIndex: getZIndex(id),
               transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
             }}
           >
-            {/* {canClose && <MenuBar onClose={handleClose} />}
-            {!canClose && <MenuBar />} */}
+            <DragMove
+              onDragMove={handleDragMove}
+              onMouseEnter={handleMouseEnter}
+            >
+              <WindowMenuBar
+                canClose
+                canMinimize
+                handleClose={handleClose}
+                handleMinimize={handleMinimize}
+              />
+            </DragMove>
             {children}
-          </DragMove>
+          </div>
         )
       }
     </>

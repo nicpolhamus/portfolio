@@ -1,19 +1,22 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Desktop, PromotableZIndexProvider, WindowProvider } from '../components';
-import { useBrowserDimensions } from '../hooks/use.browser.dimensions';
 
 const getBrowserDimensions = () => {
   const { innerHeight: height, innerWidth: width } = window;
+
+  console.log(`window dimensions: ${height}, ${width}`);
 
   return { height, width };
 };
 
 const Home: NextPage = () => {
-  const [windowDimensions, setWindowDimensions] = useState(getBrowserDimensions());
+  const [windowDimensions, setWindowDimensions] = useState<{ height: number; width: number }>({ height: 0, width: 0});
+
+  const { height, width } = windowDimensions;
 
   useEffect(() => {
     function handleResize() {
@@ -22,17 +25,19 @@ const Home: NextPage = () => {
 
     window.addEventListener('resize', handleResize);
 
+    handleResize();
+
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
-    <div>
+    <>
       <WindowProvider>
         <PromotableZIndexProvider>
           <Desktop height={height} width={width}/>
         </PromotableZIndexProvider>
       </WindowProvider>
-    </div>
+    </>
   );
 };
 

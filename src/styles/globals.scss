@@ -9,6 +9,8 @@ $menu-item-width: 50px;
 body {
   background: box;
   background-color: $secondary-color;
+  height: 100%;
+  width: 100%;
 }
 
 .desktop {
@@ -28,25 +30,66 @@ body {
   border: 1px solid $primary-color;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   position: absolute;
-  top: $menu-bar-buffer;
-  margin: 10px $menu-bar-buffer;
   font-family: $font-family;
-  z-index: 0;
-
-  :active {
-    z-index: 1;
-  }
 }
 
-.window-header {
-  background-color: $primary-color;
-  color: $secondary-color;
+.window-menu-bar {
+  background-color: lighten($secondary-color, $amount: 6);
+  color: $accent-color;
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
   height: 25px;
   border-bottom: 1px solid $primary-color;
   font-family: $font-family;
+}
+
+.window-menu-bar .menu-buttons {
+  margin: 0 0.25%;
+  padding: 0.6% 0.1% 0.6% 0.1%;
+  
+  button {
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-right-width: 1px;
+    border-left-width: 0px;
+    border-style: solid;
+    border-color: darken($accent-color, 2);
+    font-family: $font-family;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: $primary-color;
+  }
+}
+
+.window-menu-bar .window-buttons {
+  cursor: pointer;
+  margin: 0 0.25%;
+  padding: 0.6% 0.1% 0.6% 0.1%;
+  
+  button {
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 1px;
+    border-style: solid;
+    border-color: darken($accent-color, 2);
+    font-family: $font-family;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  button:hover {
+    background-color: $primary-color;
+  }
+
+  button:active {
+    background-color: darken($primary-color, 6);
+  }
 }
 
 .window-title {
@@ -66,7 +109,7 @@ body {
 button {
   background-color: transparent;
   border: none;
-  color: $secondary-color;
+  color: $accent-color;
   font-size: 14px;
   font-family: $font-family;
   cursor: pointer;
@@ -83,6 +126,11 @@ button {
   height: 25px;
   width: 100%;
   font-family: $font-family;
+}
+
+.minimized-windows {
+  margin-left: 0 0.25%;
+  padding-top: 0.25%;
 }
 
 .menu-item {

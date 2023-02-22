@@ -5,7 +5,11 @@ import { Plane } from '../../../../constants/Plane';
 import { useWindowService } from '../../../../hooks/use.window.service';
 
 interface IWindowOutlet {
-  checkBounds: (movement: number, plane: Plane) => number;
+  checkBounds: (
+    movement: number,
+    currentPos: number,
+    plane: Plane,
+  ) => number;
 }
 
 export function WindowOutlet({ checkBounds }: IWindowOutlet) {
