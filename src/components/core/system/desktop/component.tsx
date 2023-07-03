@@ -4,6 +4,8 @@ import { Plane } from "../../../../constants/Plane";
 
 import { DesktopMenuBar } from "../menuBar/component";
 import { Start } from "../menuBar/items";
+import { Shortcut } from '../shortcut/component';
+import { faFileLines } from '@fortawesome/free-solid-svg-icons';
 
 interface IDesktop {
   height: number;
@@ -42,6 +44,7 @@ export function Desktop({ height, width }: IDesktop) {
       <DesktopMenuBar items={[Start]} />
       {/* need to set a window outlet here */}
       <WindowOutlet checkBounds={checkBounds} />
+      <Shortcut icon={faFileLines} size='2xl' border />
     </div>
   );
 }
