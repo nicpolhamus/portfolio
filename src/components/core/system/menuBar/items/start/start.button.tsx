@@ -12,7 +12,7 @@ function StartOptions({ visible, handleVisibility }: TStartOptionsProps): ReactE
       {visible && (
           <ul
             role='listbox'
-            className={`menu-item-options`}
+            className='menu-item-options'
             tabIndex={-1}
           >
             {StartButtonOptions.map((Option, index) =>
@@ -27,9 +27,7 @@ function StartOptions({ visible, handleVisibility }: TStartOptionsProps): ReactE
 export function Start(): ReactElement {
   const [visible, setVisibility] = useState<boolean>(false);
 
-  const handleClick = () => {
-    setVisibility(!visible);
-  };
+  const handleClick = (): void => setVisibility(!visible);;
 
   return (
     <>

@@ -1,5 +1,4 @@
-import { ReactElement, ReactNode } from 'react';
-import { IWindowProps } from '../common/window/component';
+import { ReactNode } from 'react';
 
 export type TAction = (args: any) => void;
 
@@ -10,6 +9,7 @@ export type TPosition = {
 
 export interface IWindow {
   id: string;
+  title?: string;
   minimized?: boolean;
   defaultPosition?: TPosition;
   content?: ReactNode;

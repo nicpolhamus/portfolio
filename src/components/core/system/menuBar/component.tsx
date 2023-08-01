@@ -23,8 +23,8 @@ export function DesktopMenuBar({ items }: ISystemMenuBarProps): ReactElement {
       </>
       <div className="minimized-windows">
         {
-          currentMinimzedWindows?.map(({ id }) => (
-            <MinimizedWindow id={id} />
+          currentMinimzedWindows?.map(({ id, title }) => (
+            <MinimizedWindow id={id} title={title} />
           ))
         }
       </div>

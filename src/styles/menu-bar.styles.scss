@@ -1,0 +1,85 @@
+@import './variables.scss';
+
+.menu-bar {
+  background-color: $primary-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 25px;
+  width: 100%;
+  font-family: $font-family;
+}
+
+.minimized-windows {
+  margin-left: 0 0.25%;
+  padding-top: 0.25%;
+}
+
+.menu-item {
+  height: auto;
+  width: $menu-item-width;
+  background-color: $primary-color;
+  color: $secondary-color;
+  border: 1px solid $accent-color;
+  font-family: $font-family;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 0 0.25%;
+  padding: 0.1%;
+  overflow: visible;
+}
+
+.menu-item button {
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: $accent-color;
+  }
+
+  &:active {
+    border: 1px solid $secondary-color;
+    color: $accent-color;
+  }
+}
+
+.menu-item-options {
+  float: left;
+  border-style: solid;
+  border-color: $accent-color;
+  border-top-style: dashed;
+  border-top-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  background-color: $primary-color;
+  width: $menu-item-width;
+  margin-left: -4%;
+  margin-top: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+  list-style-type: none;
+
+  li {
+    margin-right: 1%;
+
+    &:hover {
+      background-color: $secondary-color;
+      color: $accent-color;
+    }
+
+    &:active {
+      border: 1px solid $secondary-color;
+      color: $accent-color;
+    }
+  }
+
+  li:not(:first-child) {
+    border-top-style: inset;
+    border-top-width: 1px;
+  }
+}
+
+.menu-item-options.show {
+  display: inline-block;
+}

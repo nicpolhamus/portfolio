@@ -3,9 +3,10 @@ import { useWindowService } from '../../../../../hooks/use.window.service';
 
 interface IMinimizedWindow {
   id: string;
+  title?: string;
 }
 
-export function MinimizedWindow({ id }: IMinimizedWindow): JSX.Element {
+export function MinimizedWindow({ id, title }: IMinimizedWindow): JSX.Element {
   const { toggleMinimize } = useWindowService();
 
   const handleClick: MouseEventHandler = (event) => {
@@ -15,6 +16,6 @@ export function MinimizedWindow({ id }: IMinimizedWindow): JSX.Element {
   }
 
   return (
-    <button onClick={handleClick}>{id.substring(0, 5)}</button>
+    <button onClick={handleClick}>{title ? title : id.substring(0, 5)}</button>
   );
 }

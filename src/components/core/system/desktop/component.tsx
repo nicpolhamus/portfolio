@@ -44,7 +44,6 @@ export function Desktop({ height, width }: IDesktop) {
       <DesktopMenuBar items={[Start]} />
       {/* need to set a window outlet here */}
       <WindowOutlet checkBounds={checkBounds} />
-      <Shortcut icon={faFileLines} size='2xl' border />
     </div>
   );
 }

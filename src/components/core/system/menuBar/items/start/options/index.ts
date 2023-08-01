@@ -1,4 +1,5 @@
 import { NewWindowButton } from './new.window';
+import { AppsButton } from './apps/apps.button';
 
 export interface IOptionProps {
   handleVisibility: () => void;
@@ -6,4 +7,5 @@ export interface IOptionProps {
 
 export const StartButtonOptions = [
   NewWindowButton,
+  AppsButton
 ];

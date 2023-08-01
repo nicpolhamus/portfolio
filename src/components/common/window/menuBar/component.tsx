@@ -1,34 +1,29 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler } from "react";
 
 interface IWindowMenuBar {
+  title?: string;
   canClose?: boolean;
   canMinimize?: boolean;
   handleClose?: MouseEventHandler<Element>;
   handleMinimize?: MouseEventHandler<Element>;
 }
 
-export function WindowMenuBar({ canClose, canMinimize, handleClose, handleMinimize }: IWindowMenuBar): JSX.Element {
+export function WindowMenuBar({
+  title,
+  canClose,
+  canMinimize,
+  handleClose,
+  handleMinimize,
+}: IWindowMenuBar): JSX.Element {
   return (
-    <div className='window-menu-bar'>
-      <div className='menu-buttons'>
+    <div className="window-menu-bar">
+      <div className="menu-buttons">
         {/* TODO: handle logos */}
-        <button>test</button>
+        <button>{title ? title : 'test'}</button>
       </div>
-      <div className='window-buttons'>
-        <>
-          {
-            canMinimize && (
-              <button onClick={handleMinimize}>-</button>
-            )
-          }
-        </>
-        <>
-          {
-            canClose && (
-              <button onClick={handleClose}>X</button>
-            )
-          }
-        </>
+      <div className="window-buttons">
+        <>{canMinimize && <button onClick={handleMinimize}>-</button>}</>
+        <>{canClose && <button onClick={handleClose}>X</button>}</>
       </div>
     </div>
   );

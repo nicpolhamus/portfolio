@@ -1,10 +1,7 @@
-$primary-color: #3366FF;
-$secondary-color: #202020;
-$accent-color: #CCCCCC;
-$menu-bar-buffer: 30px;
-$font-family: 'Courier New', Courier, monospace;
-
-$menu-item-width: 50px;
+@import './variables.scss';
+@import './journal.styles.scss';
+@import './window.styles.scss';
+@import './menu-bar.styles.scss';
 
 body {
   background: box;
@@ -23,89 +20,6 @@ body {
   width: 100%;
 }
 
-.window {
-  width: 400px;
-  height: 300px;
-  background-color: $secondary-color;
-  border: 1px solid $primary-color;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-  position: absolute;
-  font-family: $font-family;
-}
-
-.window-menu-bar {
-  background-color: lighten($secondary-color, $amount: 6);
-  color: $accent-color;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 25px;
-  border-bottom: 1px solid $primary-color;
-  font-family: $font-family;
-}
-
-.window-menu-bar .menu-buttons {
-  margin: 0 0.25%;
-  padding: 0.6% 0.1% 0.6% 0.1%;
-  
-  button {
-    border-top-width: 0px;
-    border-bottom-width: 0px;
-    border-right-width: 1px;
-    border-left-width: 0px;
-    border-style: solid;
-    border-color: darken($accent-color, 2);
-    font-family: $font-family;
-    font-size: 14px;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: $primary-color;
-  }
-}
-
-.window-menu-bar .window-buttons {
-  cursor: pointer;
-  margin: 0 0.25%;
-  padding: 0.6% 0.1% 0.6% 0.1%;
-  
-  button {
-    border-top-width: 0px;
-    border-bottom-width: 0px;
-    border-right-width: 0px;
-    border-left-width: 1px;
-    border-style: solid;
-    border-color: darken($accent-color, 2);
-    font-family: $font-family;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
-
-  button:hover {
-    background-color: $primary-color;
-  }
-
-  button:active {
-    background-color: darken($primary-color, 6);
-  }
-}
-
-.window-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0 10px;
-  color: $accent-color;
-  font-family: $font-family;
-}
-
-.window-content {
-  padding: 10px;
-  overflow: auto;
-  font-family: $font-family;
-}
-
 button {
   background-color: transparent;
   border: none;
@@ -116,88 +30,4 @@ button {
   &:hover {
     color: $accent-color;
   }
-}
-
-.menu-bar {
-  background-color: $primary-color;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  height: 25px;
-  width: 100%;
-  font-family: $font-family;
-}
-
-.minimized-windows {
-  margin-left: 0 0.25%;
-  padding-top: 0.25%;
-}
-
-.menu-item {
-  height: auto;
-  width: $menu-item-width;
-  background-color: $primary-color;
-  color: $secondary-color;
-  border: 1px solid $accent-color;
-  font-family: $font-family;
-  font-size: 14px;
-  cursor: pointer;
-  margin: 0 0.25%;
-  padding: 0.1%;
-  overflow: visible;
-}
-
-.menu-item button {
-  text-transform: uppercase;
-
-  &:hover {
-    background-color: $secondary-color;
-    color: $accent-color;
-  }
-
-  &:active {
-    border: 1px solid $secondary-color;
-    color: $accent-color;
-  }
-}
-
-.menu-item-options {
-  float: left;
-  border-style: solid;
-  border-color: $accent-color;
-  border-top-style: dashed;
-  border-top-width: 1px;
-  border-right-width: 1px;
-  border-bottom-width: 1px;
-  border-left-width: 1px;
-  background-color: $primary-color;
-  width: $menu-item-width;
-  margin-left: -4%;
-  margin-top: 2%;
-  padding-left: 2%;
-  padding-right: 2%;
-  list-style-type: none;
-
-  li {
-    margin-right: 1%;
-
-    &:hover {
-      background-color: $secondary-color;
-      color: $accent-color;
-    }
-
-    &:active {
-      border: 1px solid $secondary-color;
-      color: $accent-color;
-    }
-  }
-
-  li:not(:first-child) {
-    border-top-style: inset;
-    border-top-width: 1px;
-  }
-}
-
-.menu-item-options.show {
-  display: inline-block;
 }

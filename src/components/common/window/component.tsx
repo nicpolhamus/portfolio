@@ -8,10 +8,10 @@ import { WindowMenuBar } from './menuBar/component';
 
 export interface IWindowProps {
   id: string;
-  content?: ReactNode;
   defaultPosition?: TPosition;
   canClose?: boolean;
   canMinimize?: boolean;
+  title?: string;
   checkBounds: (
     movement: number,
     currentPos: number,
@@ -20,10 +20,11 @@ export interface IWindowProps {
 }
 
 export function Window({
-  defaultPosition = { x: 0, y: 0 },
+  defaultPosition = { x: 10, y: 10 },
   id,
   canClose = true,
   canMinimize = true,
+  title,
   checkBounds,
   children,
 }: PropsWithChildren<IWindowProps>) {
@@ -84,8 +85,9 @@ export function Window({
               onMouseEnter={handleMouseEnter}
             >
               <WindowMenuBar
-                canClose
-                canMinimize
+                title={title}
+                canClose={canClose}
+                canMinimize={canMinimize}
                 handleClose={handleClose}
                 handleMinimize={handleMinimize}
               />
