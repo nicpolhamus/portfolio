@@ -1,7 +1,12 @@
 $primary-color: #3366FF;
 $secondary-color: #202020;
 $accent-color: #CCCCCC;
-$menu-bar-buffer: 30px;
 $font-family: 'Courier New', Courier, monospace;
 
-$menu-item-width: 50px;
+// menu bar
+$menu-bar-buffer: 30px;
+$menu-item-width: 65px;
+// window
+$window-height: 300px;
+$window-width: 400px;
+$window-menu-bar-height: 25px;

@@ -33,6 +33,7 @@ export function Start(): ReactElement {
     <>
       <div className='menu-item'>
         <button
+          className='menu-item-button'
           aria-haspopup='listbox'
           aria-expanded={visible}
           type='button'

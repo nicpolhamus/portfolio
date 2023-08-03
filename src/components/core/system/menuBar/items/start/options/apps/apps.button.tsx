@@ -14,7 +14,7 @@ function AppList({ visible, handleVisibility }: TAppListProps): ReactElement {
       {visible && (
         <ul
           role='listbox'
-          className='menu-item-options-right'
+          className='menu-item-options--right'
           tabIndex={-1}
         >
           {AppListOptions.map((App, index) =>
@@ -40,10 +40,10 @@ export function AppsButton({ handleVisibility }: IOptionProps): ReactElement {
         aria-expanded={visible}
       > 
         <button onClick={handleClick}>
-          Apps
+          Apps {visible ? '<' : '>'}
         </button>
-        <AppList visible={visible} handleVisibility={handleVisibility} />
       </li>
+      <AppList visible={visible} handleVisibility={handleVisibility} />
     </>
   );
 }
